@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is built from a template for a generic Internet Draft. Suggestions for
+     improvement welcome - write to Brian Carpenter, brian.e.carpenter @ gmail.com 
+     This can be converted using the Web service at http://xml.resource.org/ -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<!-- You want a table of contents -->
+<!-- Use symbolic labels for references -->
+<!-- This sorts the references -->
+<!-- Change to "yes" if someone has disclosed IPR for the draft -->
+<!-- This defines the specific filename and version number of your draft (and inserts the appropriate IETF boilerplate -->
+<?rfc sortrefs="yes"?>
+<?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<?rfc topblock="yes"?>
+<?rfc comments="no"?>
+<rfc category="info"
+     docName="draft-li-6gip-fine-grained-privacy-network-00"
+     ipr="trust200902">
+  <front>
+    <title abbrev="Fine Grained Privacy for network">Future Requirements of Fine-Grained Privacy for the Network</title>
+
+      <seriesInfo name="Internet-Draft" value="draft-li-6gip-fine-grained-privacy-network-00"/>
+      <author initials="L." surname="Li" fullname="Lun Li">
+        <organization>Huawei</organization>
+        <address>
+          <email>lilun20@huawei.com</email>
+        </address>
+      </author>
+      <author initials="F." surname="Liu" fullname="Faye Liu">
+        <organization>Huawei Singapore</organization>
+        <address>
+          <email>liufei19@huawei.com</email>
+        </address>
+      </author>
+
+    <!---->
+
+    <date day="4" month="July" year="2025"/>
+
+    <keyword>privacy</keyword>
+    <keyword>privacy computing</keyword>
+
+    <abstract>
+      <t>This draft describes some potential new privacy requirements for the future network. We start from the data lifecycle and propose that the privacy needs 
+      to be considered during the data is processing. We also introduce some new academic research results. Some use cases are proposed. The goal is to attract 
+      IETF working or interest groups in researching to these new requirements in protocol level for the future network.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>As mentioned in ITU-R "Framework and Overall Objectives of the Future Development of IMT in 2030 and beyond", new services in future network will be very likely to use 
+      computing power for data processing instead of only data transmission <xref target="ITU2083"/>. However, privacy issues may occur in the data processing and management phase. 
+      Possible scenarios can be sensing services and/or data analytics services, where user-related data will be collected and processed for example to derive 
+      sensing/analytic results, which may touch the sensitive information contained in the data. As shown in Figure 1, 5G networks do consider protecting user privacy 
+      with mechanisms like identity concealment, user consent and so on. However, existing mechanisms do not cover privacy preserving consideration happening in heavy 
+      data processing and management services provided in network system.</t>
+
+      <t>Given that the latest legal regulations (e.g., Data Act <xref target="DATAACT"/> and eIDAS2.0 in EU <xref target="EUDI"/>) force stronger privacy protection and full sovereignty of the data ownership
+      , the lifecycle privacy-preserving consideration and management should be further enhanced. </t>
+      <t><figure  align="center">
+        <artwork name="Vulnerability of privacy in data lifecycle"><![CDATA[                                  
+        |                                    
+        v  Data lifecycle management         
++-------------+                             
+|  Generation/|                             
+|  collection |                             
++-------------+                             
++-------------+                             
+|  Storage    |                             
++-------------+                             
++-------------+                             
+|Transmission |                             
++-------------+                             
++-------------+                             
+| Processing  | <-----Potential            
++-------------+       new issues            
++-------------+                             
+|    Usage    |                             
++------|------+                             
+       |                                                                     
+       v                                    
+                  Figure 1: Vulnerability of privacy in data lifecycle]]></artwork>
+    </figure></t>
+
+      <t>In future telco network, individual users may want their data being processed in their favorable way. First of all, depending conditions such as whether the user is at home, 
+      in public, or consumes certain types of services, a user may either relax or escalate the privacy preserving level. Second, a user may want to indicate at where 
+      his data shall be processed, e.g., centralized at the operator side or partly exposed to third parties. Third, a user may want to specify what type of data 
+      processing techniques shall be used to process his data to guarantee the privacy preserving strength. In general, a user expects a stronger but more fine-grained 
+      privacy-preserving consideration for data processing and management services.</t>
+
+      <t>Same issues have also been raised in internet apps, Regarding to the processing privacy, such as the privacy information retrieval (PIR) mentioned by Apple at WWDC25. Through PIR, 
+      a device can retrieve and return data through a server, but the server cannot associate the device with the specific returned content. 
+      This is achieved through homomorphic encryption and is open-sourced at link: https://github.com/apple/swift-homomorphic-encryption. Besides, We 
+      also see the potential of new technologies, such as private set intersection (PSI), which is very useful in cloud computing, such as in the field of federated learning. 
+      These drive us to research how new privacy-preserving technologies can be used in future networks in protocol level. </t>
+    </section>
+
+    <section anchor="requirements-language" title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+    </section>
+
+    <section title="AIML Use case for privacy reqirements in future network">
+    <t># TODO</t>
+    </section>
+
+    <section title="Potential New Requirements of Privacy as a serivce(PrivaaS)">
+    <t>Several users request services where their data will be processed by the network. 
+    Given individual preferences indicated by the users, the network should provide fine-grained 
+    privacy-preserving schemes during the service time for the users. This could for example based on service types, 
+    user subscriptions/context, network states, etc.</t>
+    
+    <t>Users A, B, and C request different network services. For example, user A uses network to browse web pages, 
+    and user B uses the network to share data with a third party to obtain third-party services. User C relies on the  
+    network to assist his vehicle self-driving, where environment sensing information including privacy content will be collected 
+    by the network. </t>
+
+    <t>Depending on the user's requirements and network settings, fine-grained privacy mechanisms will be used correspondingly for each user.
+    For example: </t>
+
+    <t><list style="decimal">
+      <t>User A uses anonymization of identity identifiers as a fine-grained privacy protection mechanism, which attackers cannot distinguish network traffic from others.</t>
+      <t>User B uses a data pseudonym as a privacy protection mechanism. User data is processed to remove potential privacy risks, such as location scoping instead of precise location information.</t>
+      <t>User C uses homomorphic encryption to perform environment sensing information computing and identify the obstacles while the data is encrypted.</t>
+      </list></t>
+    
+    <t>By leveraging privacy as a service, both users' requirements are fulfilled with fine-grained privacy-preserving mechanism supported from the network such as in telecom. 
+    User requirements and service data requirements can be adapted at the same time.</t>
+
+      <section title="Potential new privacy technique for PrivaaS">
+        <t>As the example shows, homomorphic encryption is just an example of a new technology. Some new technologies have been discussed in academia, 
+        and they can all be considered. The following are some examples of new potential privacy technologies for processing privacy.</t>
+        <t><list style="decimal">
+          <t>Ciphertext computation: It refers to the operation of performing calculations directly on encrypted data without decrypting it first. </t>
+          <t>Privacy information retrieval (PIR): It is a technology that enables the querying party to hide the keywords of the queried object or customer ID information.</t>
+          <t>Private set intersection (PSI): It is a cryptographic protocol, which is used to compare the intersection of private data sets of two or more parties, while ensuring 
+          that the respective data of each party will not be leaked. </t>
+          <t>Multi-party computation (MPC): It is a general - purpose cryptographic primitive. Without disclosing the original input data of the participants, 
+          it allows distributed participants to cooperate in calculating any function and output accurate calculation results.</t>        
+          </list></t>
+        <t>#TODO: How the new technology is used at the protocol level is an ffs</t>
+      </section><!-- Potential new privacy technique for PrivaaS-->
+    </section><!-- Potential New Requirements of Privacy as a serivce(PrivaaS)-->
+
+
+
+  <section title="Existing Privacy Designs in the Telco netowrk.">
+    <t>Requirements for privacy for 5G are defined in 3GPP TS 22.261 <xref target="TS22261"/>: The 5G system shall support a secure mechanism to collect system information while ensuring end-user and application 
+    privacy (e.g., application-level information is not to be related to an individual user identity or subscriber identity and UE information is not to be related 
+    to an individual subscriber identity).Some design principles have been applied to the solution, such as exposure collection of user information and use consent 
+    principles. User identifiers are also protected, such as concealment the user's permanent identity (SUPI) and using non-permanent identifiers such as 
+    GUTI(Globally Unique Temporary Identifier) and GPSI(Generic Public Subscription Identifier) to handle user-related information.</t>
+    <t>It is worth mentioning that these technologies often use pseudonymization, and the privacy of data and content processing may need to be enhanced.</t>
+
+  </section><!-- Existing Privacy Designs in the Telco netowrk-->
+
+  <section title="Potential Related IETF/IRTF Groups.">
+    <t>Some potential WGs may be related to the privacy needs mentioned above, as follows:</t>
+
+    <t><list style="decimal">
+      <t>6GIP is a group that specifically discusses the privacy and security issues for the network including 6G</t>
+      <t>The Privacy Preserving Measurement (ppm) working group is proposing a protocol for multi-party computation using cryptographic techniques, 
+      although use case is limit to information measurement, the charter's goal is to address privacy issues in data collection.</t>
+      <t>Privacy Enhancements and Assessments Research Group (pearg) is a general forum for discussing and reviewing privacy enhancing technologies for 
+      network protocols and distributed systems in general, and for the IETF in particular. </t>
+      <t>Crypto Forum Research Group (CFRG) is a general forum for discussing and reviewing uses of cryptographic mechanisms, both for network security 
+      in general and for the IETF in particular. Some of the latest algorithms and academic results may be discussed in CFRG.</t>
+    </list></t>
+
+    <t>TODO: Identifying more WG is ffs</t>
+
+  </section><!-- Potential Related IETF/IRTF Groups-->
+
+
+  <section anchor="iana-considerations">
+    <name>IANA Considerations</name>
+    <t>This document has no IANA considerations.</t>
+  </section>
+
+  <section title="Security Consideration">
+    <t>TODO</t>
+    
+  </section><!--8 Security Consideration-->
+
+
+
+  </middle>
+
+  <back>
+
+    <references title = "References">
+
+      <references title = "Normative Reference">
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author fullname="S. Bradner" initials="S." surname="Bradner"/>
+          <date month="March" year="1997"/>
+          <abstract>
+            <t>In many standards track documents several words are used to signify the requirements in the specification. These words are often capitalized. This document defines these words as they should be interpreted in IETF documents. This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="BCP" value="14"/>
+        <seriesInfo name="RFC" value="2119"/>
+        <seriesInfo name="DOI" value="10.17487/RFC2119"/>
+      </reference>
+
+      <reference anchor="ITU2083" target="https://www.itu.int/dms_pub/itu-d/oth/07/31/D07310000090015PDFE.pdf">
+        <front>
+        <title>Framework and Overall Objectives of the Future Development of IMT in 2030 and beyond</title>
+        <author fullname="International Telecommunication Union (ITU)"/>
+        <date month="May" year="2024"/>
+        </front>
+        <seriesInfo name="Group" value="ITU-D SG2"/>
+      </reference>
+
+      <reference anchor="TS22261" target="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3107">
+        <front>
+        <title>	Service requirements for the 5G system</title>
+        <author fullname="3GPP"/>
+        <date month="Jun" year="2025"/>
+        </front>
+        <seriesInfo name="TS" value="22.261"/>
+        <seriesInfo name="Group" value="3GPP/SA3"/>
+      </reference>
+
+
+    </references>
+
+      <references title = "Informative References">
+    
+      <reference anchor="DATAACT" target="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52022PC0068">
+        <front>
+        <title>Proposal for a REGULATION OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL on harmonised rules on fair access to and use of data (Data Act)</title>
+        <author fullname="European Union law"/>
+        <date month="Feb" day="23" year="2022"/>
+        </front>
+      </reference>
+
+      <reference anchor="EUDI" target="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52022PC0068">
+        <front>
+        <title>European Commission. Proposal for a Regulation of the European Parliament and of the Council amending Regulation (EU) No 910/2014 as regards establishing a framework for a European Digital Identity. </title>
+        <author fullname="European Union law"/>
+        <date month="Jun" day="3" year="2021"/>
+        </front>
+      </reference>
+
+
+
+    </references>
+  </references>
+  
+    <section anchor="acknowledgments" numbered="false"> 
+      <name>Acknowledgments</name>
+      <t>TODO</t>
+    </section>
+
+  </back>
+</rfc>
